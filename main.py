@@ -1,6 +1,7 @@
 import os 
 from pymongo import MongoClient
 from dotenv import load_dotenv
+from db_operations.utils import insert, update, find_aggregate
 
 load_dotenv()
 
@@ -20,8 +21,19 @@ try:
     print("Connected on Mongo")
     
     # seed data on db
-    insert(connection)
+    # insert(collection)
     
-    # update
+    # update based on console info
+    # property = input("Type the property you want to update:")
+    # identifier = input("Type the book title you want to update:")
+    # new_data = input("Type the new value you want to set in the new property:")
+    # update(str(property), str(identifier), str(new_data), collection)
+    
+    # find price by book title
+    # title = input("Type the book you want to know the price:")
+    # find_aggregate(title, collection)
+    
+    # get the total value of the books
+    
 except Exception as ex:
     print("Connection failed:", ex)
