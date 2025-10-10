@@ -44,3 +44,25 @@ def find_aggregate(title, collection):
             print("Book was not found")
     except Exception as ex: 
         print("Find failed", ex)
+
+def group_price(collection, db_name, final_collection):
+    try:
+        total = collection.aggregate([{
+            "$group": {
+            "_id": 0,
+            "total": {
+                "$sum": "$price"
+            }
+            }
+        }, {
+            "$out": {
+                "db": db_name,
+                "coll": final_collection
+            }
+        }])
+        
+        if total:
+            for element in total:
+                print(f"The total value of the books is {element['total']} dolars")          
+    except Exception as ex:
+        print("Fail to sum total book value", ex)

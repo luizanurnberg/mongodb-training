@@ -1,13 +1,14 @@
 import os 
 from pymongo import MongoClient
 from dotenv import load_dotenv
-from db_operations.utils import insert, update, find_aggregate
+from db_operations.utils import insert, update, find_aggregate, group_price
 
 load_dotenv()
 
 mongo_credentials = os.getenv("MONGO_DB_CREDENTIALS")
 db_name = os.getenv("DB_NAME")
 db_collection = os.getenv("DB_COLLECTION")
+sales_collection = os.getenv("SALES_COLLECTION")
 
 if not mongo_credentials or not db_name or not db_collection:
     raise ValueError("Environment variables are note available")
@@ -34,6 +35,6 @@ try:
     # find_aggregate(title, collection)
     
     # get the total value of the books
-    
+    group_price(collection, db_name, sales_collection)
 except Exception as ex:
     print("Connection failed:", ex)
